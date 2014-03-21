@@ -1,0 +1,14 @@
+﻿@if (Request.IsAuthenticated)
+{
+	<ul class="nav nav-pills">
+		<li class="dropdown">
+			<p>Hello</p>
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">@User.Identity.Name</a>
+		</li>
+	</ul>
+	using (Html.BeginForm("LogOff", "Auth", FormMethod.Post, new { id = "logoutForm" }))
+	{
+	@Html.AntiForgeryToken()
+	<a href="javascript:document.getElementById('logoutForm').submit()">Exit</a>
+	}
+}

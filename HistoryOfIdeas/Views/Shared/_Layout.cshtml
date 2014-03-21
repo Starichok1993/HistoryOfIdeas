@@ -1,0 +1,20 @@
+﻿@using System.Globalization
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" media="screen" />
+    <title>@ViewBag.Title</title>
+    @Html.Partial("_ScriptsPartial")
+</head>
+    <body>
+        <div></div>
+        <div> @Html.Partial("_AccountControlPartial")</div>
+        <div>
+            @RenderBody()
+        </div>
+        
+        <div class="footer">@DateTime.Now</div>
+    </body>
+</html>

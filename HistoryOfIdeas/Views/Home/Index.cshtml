@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Index</h2>
+
+<p>Hi from Ideas Controller!</p>
+
+<div class="addNewIdea">
+    <input type="text" placeholder="Enter yor idea" data-bind="value: newIdea" />
+    <button data-bind="click: addIdea">Submit</button>
+</div>
+
+<p data-bind="text: newIdea"></p>
+
+<div class="IdeasContainer">
+    <div data-bind="foreach: ideas">
+        <p data-bind=" text: text">
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/knockout-3.1.0.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/Site/ideasScript.js")" type="text/javascript"></script>
