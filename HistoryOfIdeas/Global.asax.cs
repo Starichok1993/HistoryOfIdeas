@@ -22,7 +22,7 @@ namespace HistoryOfIdeas
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            GlobalConfiguration.Configuration.MessageHandlers.Add(new CorsHandler());
+           // GlobalConfiguration.Configuration.MessageHandlers.Add(new CorsHandler());
 
             ControllerBuilder.Current.SetControllerFactory(new NinjectFactory());
             GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(new HistoryOfIdeasKernel());

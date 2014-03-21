@@ -10,20 +10,37 @@
         if (model.length == 0) {
             self.ideas = ko.observableArray();
         } else {
+            for (var item in model) {
+                model[item].isEditing = ko.observable(false);
+                model[item].Text = ko.observable(model[item].Text);
+            }
             self.ideas = ko.observableArray(model);
         }
+
         self.newIdea = ko.observable("");
 
 
         //help functions
         function addIdeaToList(data) {
+            data.isEditing = ko.observable(false);
             self.ideas.unshift(data);
-            self.newIdea = "";
+            self.newIdea("");
         }
 
         function serverError(error) {
             alert("Server error");
         }
+
+        function putRequestToServer(idea) {
+            $.ajax({
+                url: "api/ideas/" + idea.Id,
+                dataType: "json",
+                type: "Put",
+                data: "=" + idea.Text(),
+                error: serverError
+            });
+        }
+
 
         //event handler
         self.addIdea = function() {
@@ -31,30 +48,58 @@
                 return;
             }
 
-            //$.ajax({
-            //    url: "/api/ideas",
-            //    type: "Post",
-            //    dataType: "json",
-            //    data: self.newIdea(),
-            //    success: addIdeaToList,
-            //    error: function (err) {
-            //        alert("Server error");
-            //        console.log(err);
-            //    }
-            //});
-            $.post("/api/ideas", self.newIdea(), addIdeaToList).fail(serverError);
+            $.ajax({
+                url: "/api/ideas",
+                type: "Post",
+                data: "=" + self.newIdea(),
+                success: addIdeaToList,
+                error: function (err) {
+                    alert("Server error");
+                    console.log(err);
+                }
+            });
+          //  $.post("/api/ideas", {
+          //      "newIdea" : self.newIdea()
+       // }, addIdeaToList).fail(serverError);
         };
 
         self.deleteIdea = function(idea) {
             if (idea != null) {
-                $.ajax({
-                    url: "api/ideas",
-                    dataType: "json",
-                    type: "Delete",
-                    data: idea.Id,
-                    error: serverError
-                });
+
+                if (confirm("A your sure?")) {
+                    $.ajax({
+                        url: "api/ideas",
+                        dataType: "json",
+                        type: "Delete",
+                        data: "=" + idea.Id,
+                        success: function() {
+                            self.ideas.remove(idea);
+                        },
+                        error: serverError
+                    });
+                }
             }
+        };
+
+        self.editIdea = function(idea) {
+            if (idea != null) {
+                putRequestToServer(idea);
+            }
+            return;
+        };
+
+        self.enableEdit = function(idea) {
+            if (idea != null) {
+                idea.isEditing(true);
+            }
+            return;
+        };
+
+        self.disableEdit = function (idea) {
+            if (idea != null) {
+                idea.isEditing(false);
+            }
+            return;
         };
 
         return self;
@@ -73,6 +118,7 @@
             if (data === null) {
                 data = new Array();
             }
+
             ideasFromServer = data;
         },
         error: function() {

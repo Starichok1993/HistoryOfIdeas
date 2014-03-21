@@ -148,6 +148,7 @@
     </Compile>
     <Compile Include="Handlers\CorsHandler.cs" />
     <Compile Include="Helpers\HistoryOfIdeasMembershipProvider.cs" />
+    <Compile Include="Helpers\IdeasMapper.cs" />
     <Compile Include="Infrastructure\NinjectFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\IdeasController.cs" />

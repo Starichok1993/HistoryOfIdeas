@@ -13,4 +13,11 @@ namespace HistoryOfIdeas.DAL.Entity
         public virtual User User { set; get; }
 
     }
+
+    public class IdeaViewModel
+    {
+        public int Id { set; get; }
+        public string Text { set; get; }
+        public int UserId { set; get; }
+    }
 }

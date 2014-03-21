@@ -13,11 +13,17 @@
     <button data-bind="click: addIdea">Submit</button>
 </div>
 
-<p data-bind="text: newIdea"></p>
-
-<div class="IdeasContainer">
-    <div data-bind="foreach: ideas">
-        <p data-bind=" text: text">
+<div class="IdeasContainer" data-bind="foreach: ideas">
+    <div class="item">
+        <div data-bind="visible: isEditing() != true">
+            <p data-bind=" text: Text, click: enableEdit"></p>
+            <div class="right">
+                <button type="button" style="color: red" class="close" aria-hidden="true" data-bind="click: deleteIdea">&times;</button>
+            </div>
+        </div>
+        <div data-bind="visible: isEditing">
+            <input type="text" data-bind="value: Text, hasfocus: isEditing, event:{blur: editIdea}">
+        </div>
     </div>
 </div>
 
