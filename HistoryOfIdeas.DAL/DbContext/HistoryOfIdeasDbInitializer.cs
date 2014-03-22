@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Web.Helpers;
 using HistoryOfIdeas.DAL.Entity;
 
 namespace HistoryOfIdeas.DAL.DbContext
@@ -10,12 +11,12 @@ namespace HistoryOfIdeas.DAL.DbContext
         {
             base.Seed(context);
 
-            context.Users.Add(new User()
+            context.Users.Add(new User
             {
                 Name = "Alex",
                 Surname = "Star",
                 Email = "star@n1.by",
-                Password = "123123"
+                Password = Crypto.HashPassword("123123")
             });
 
             context.SaveChanges();

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Helpers;
 using HistoryOfIdeas.BLL.Interface.Services;
 using HistoryOfIdeas.DAL.Entity;
@@ -81,7 +78,8 @@ namespace HistoryOfIdeas.BLL.Services
             }
             catch (Exception e)
             {
-                var list = _userRepository.All.ToList();
+                //var list = _userRepository.All.ToList();
+                Console.WriteLine(e.Message);
                 user = null;
             }
             return user;

@@ -65,6 +65,7 @@ namespace HistoryOfIdeas.DAL.Entity
 
         [Required(ErrorMessage = "*")]
         [Display(Name = "Confirm password")]
+        [DataType(DataType.Password)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
     }

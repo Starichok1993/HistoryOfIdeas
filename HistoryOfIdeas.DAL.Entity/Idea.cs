@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using HistoryOfIdeas.DAL.Entity.Interface;
 
 namespace HistoryOfIdeas.DAL.Entity
@@ -8,7 +9,10 @@ namespace HistoryOfIdeas.DAL.Entity
         [Key]
         public int Id { set; get; }
         public string Text { set; get; }
+        public DateTime PublicationTime { set; get; }
+
         public int UserId { set; get; }
+
 
         public virtual User User { set; get; }
 
@@ -19,5 +23,6 @@ namespace HistoryOfIdeas.DAL.Entity
         public int Id { set; get; }
         public string Text { set; get; }
         public int UserId { set; get; }
+        public string PublicationTime { set; get; }
     }
 }

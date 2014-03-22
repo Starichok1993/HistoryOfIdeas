@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
-using System.Web.UI.WebControls;
 using HistoryOfIdeas.BLL.Interface.Services;
 using HistoryOfIdeas.DAL.Entity;
 using HistoryOfIdeas.Helpers;
 
 namespace HistoryOfIdeas.Controllers
 {
+    [Authorize]
     public class IdeasController : ApiController
     {
         private readonly IUserService _userService;
@@ -28,7 +27,7 @@ namespace HistoryOfIdeas.Controllers
             var user = _userService.GetUserByEmail(User.Identity.Name);
             if (user != null)
             {
-                return  IdeasMapper.MapListToViewModels(user.Ideas);
+                return  IdeasMapper.MapListToViewModels(user.Ideas.OrderBy(y=> y.PublicationTime).Reverse());
             }
             return new List<IdeaViewModel>();
         }
@@ -52,10 +51,11 @@ namespace HistoryOfIdeas.Controllers
             var user = _userService.GetUserByEmail(User.Identity.Name);
             if (user != null)
             {
-                _ideaService.CreateIdea(new Idea() {Text = value, User = user});
+                var time = DateTime.Now;
+                _ideaService.CreateIdea(new Idea {Text = value, User = user, PublicationTime = time});
 
 
-                var idea = user.Ideas.FirstOrDefault(i => i.Text == value);
+                var idea = user.Ideas.FirstOrDefault(i => i.Text == value && i.PublicationTime == time );
 
 
                 return IdeasMapper.MapToViewModel(idea);

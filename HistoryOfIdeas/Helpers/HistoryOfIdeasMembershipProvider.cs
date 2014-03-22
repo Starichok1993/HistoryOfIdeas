@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Web.Helpers;
-using System.Web.Http;
 using System.Web.Security;
-using HistoryOfIdeas.App_Start;
 using HistoryOfIdeas.BLL.Interface.Services;
 using HistoryOfIdeas.DAL.Entity;
 using HistoryOfIdeas.IoC.DependencyInjection;

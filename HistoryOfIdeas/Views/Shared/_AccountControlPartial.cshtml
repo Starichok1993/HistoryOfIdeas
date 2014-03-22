@@ -1,14 +1,16 @@
 ﻿@if (Request.IsAuthenticated)
 {
-	<ul class="nav nav-pills">
-		<li class="dropdown">
-			<p>Hello</p>
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">@User.Identity.Name</a>
-		</li>
-	</ul>
-	using (Html.BeginForm("LogOff", "Auth", FormMethod.Post, new { id = "logoutForm" }))
-	{
-	@Html.AntiForgeryToken()
-	<a href="javascript:document.getElementById('logoutForm').submit()">Exit</a>
-	}
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a href="@Url.Action("Index", "Home")">@User.Identity.Name</a>
+        </li>
+
+        <li>
+            @using (Html.BeginForm("LogOff", "Auth", FormMethod.Post, new { id = "logoutForm", @class = "navbar-text" }))
+            {
+                @Html.AntiForgeryToken()
+                <a href="javascript:document.getElementById('logoutForm').submit()">Exit</a>
+            }
+        </li>
+    </ul>
 }

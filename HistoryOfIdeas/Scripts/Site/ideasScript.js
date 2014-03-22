@@ -23,12 +23,13 @@
         //help functions
         function addIdeaToList(data) {
             data.isEditing = ko.observable(false);
+            data.Text = ko.observable(data.Text);
             self.ideas.unshift(data);
             self.newIdea("");
         }
 
         function serverError(error) {
-            alert("Server error");
+            alert("Server error" + error);
         }
 
         function putRequestToServer(idea) {
@@ -104,7 +105,6 @@
 
         return self;
     }
-
 
     var ideasFromServer;
 

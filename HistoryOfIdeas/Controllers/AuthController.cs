@@ -1,5 +1,4 @@
-﻿using System.Web.Helpers;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Security;
 using HistoryOfIdeas.DAL.Entity;
 using HistoryOfIdeas.Helpers;
@@ -19,7 +18,7 @@ namespace HistoryOfIdeas.Controllers
 
             return RedirectToAction("LogIn");
         }
-
+        
         public ActionResult LogIn()
         {
 
@@ -31,14 +30,13 @@ namespace HistoryOfIdeas.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-               // if (Membership.ValidateUser(user.Email, Crypto.HashPassword(user.Password)))
                 if (((HistoryOfIdeasMembershipProvider)Membership.Provider).ValidateUser(user.Email, user.Password))
                 {
                     FormsAuthentication.SetAuthCookie(user.Email, user.RememberMe);
 
                     return RedirectToAction("Index", "Home");
                 }
+
                 ModelState.AddModelError("", "Wrong email or pass");
             }
             return View(user);
