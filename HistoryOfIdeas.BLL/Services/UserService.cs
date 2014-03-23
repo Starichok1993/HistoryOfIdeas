@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Helpers;
 using HistoryOfIdeas.BLL.Interface.Services;
@@ -16,7 +17,7 @@ namespace HistoryOfIdeas.BLL.Services
             _userRepository = userRepository;
         }
 
-        public IQueryable<User> Users
+        public IEnumerable<User> Users
         {
             get { return _userRepository.All; }
         }

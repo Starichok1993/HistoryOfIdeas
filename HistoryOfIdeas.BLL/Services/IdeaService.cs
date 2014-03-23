@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using HistoryOfIdeas.BLL.Interface.Services;
 using HistoryOfIdeas.DAL.Entity;
@@ -15,7 +16,7 @@ namespace HistoryOfIdeas.BLL.Services
             _ideaRepository = ideaRepository;
         }
 
-        public IQueryable<Idea> Ideas {
+        public IEnumerable<Idea> Ideas {
             get { return _ideaRepository.All; }
         }
         

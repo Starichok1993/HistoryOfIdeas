@@ -1,4 +1,4 @@
-﻿(function($, ko) {
+﻿(function($, ko, url) {
 
     $.support.cors = true;
 
@@ -34,7 +34,7 @@
 
         function putRequestToServer(idea) {
             $.ajax({
-                url: "api/ideas/" + idea.Id,
+                url: url + "/" + idea.Id,
                 dataType: "json",
                 type: "Put",
                 data: "=" + idea.Text(),
@@ -50,7 +50,7 @@
             }
 
             $.ajax({
-                url: "/api/ideas",
+                url: url,
                 type: "Post",
                 data: "=" + self.newIdea(),
                 success: addIdeaToList,
@@ -69,7 +69,7 @@
 
                 if (confirm("A your sure?")) {
                     $.ajax({
-                        url: "api/ideas",
+                        url: url,
                         dataType: "json",
                         type: "Delete",
                         data: "=" + idea.Id,
@@ -109,7 +109,7 @@
     var ideasFromServer;
 
     $.ajax({
-        url: "/api/ideas",
+        url: url,
         dataType: "json",
         async: false,
         cache: false,
@@ -131,4 +131,4 @@
     ko.applyBindings(viewModel);
 
 
-})(jQuery, ko);
+})(jQuery, ko, "/api/ideas");

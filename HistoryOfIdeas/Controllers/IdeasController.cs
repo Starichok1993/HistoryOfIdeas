@@ -27,7 +27,7 @@ namespace HistoryOfIdeas.Controllers
             var user = _userService.GetUserByEmail(User.Identity.Name);
             if (user != null)
             {
-                return  IdeasMapper.MapListToViewModels(user.Ideas.OrderBy(y=> y.PublicationTime).Reverse());
+                return  IdeasMapper.MapListToViewModels(user.Ideas.OrderByDescending(y=> y.PublicationTime));
             }
             return new List<IdeaViewModel>();
         }

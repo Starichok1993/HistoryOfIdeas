@@ -1,11 +1,12 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace HistoryOfIdeas.DAL.Interface.Repositories
 {
     public interface IRepository<T>
 		where T : class
 	{
-		IQueryable<T> All { get; }
+		IEnumerable<T> All { get; }
 
 		T Find(int id);
 

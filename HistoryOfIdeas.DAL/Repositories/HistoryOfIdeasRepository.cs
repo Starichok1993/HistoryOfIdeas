@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using HistoryOfIdeas.DAL.DbContext;
 using HistoryOfIdeas.DAL.Entity.Interface;
@@ -21,9 +22,9 @@ namespace HistoryOfIdeas.DAL.Repositories
 			DbSet = context.Set<T>();
 		}
 
-		public IQueryable<T> All
+		public IEnumerable<T> All
 		{
-			get { return DbSet; }
+			get { return DbSet.ToList(); }
 		}
 
 		public T Find(int id)
